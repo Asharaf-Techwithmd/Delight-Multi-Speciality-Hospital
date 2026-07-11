@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "OurDoctor";
+    Layout = "~/Views/Shared/HomeZone.cshtml";
+}
+@using System.Data;
+@using System.Data.SqlClient;
+@using ArcaneClinic.Models;
+<style>
+    .card-text {
+        color: #004E9A;
+    }
+    .button {
+        color: #fff;
+        background: #004E9A;
+    }
+</style>
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h3 class="text-center" style="color: #004E9A; font-size: 50px; font-family: Algerian"><b> <a style="color:black;font-size:40px">our</a>Specialists</b></h3>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <br />
+    <div class="row">
+@{
+                            string cmd = "select * from addoctor where status='yes'";
+                            DataTable dt = DatabaseManager.Display_All_Records(cmd);
+                            if (dt.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="card">
+                    <img src="~/Content/doctor_img/@dt.Rows[i]["image"]" class="card-img-top  img-thumbnail" alt="3" style="height:200px; width:100%;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-black">@dt.Rows[i]["name"] (@dt.Rows[i]["qualification"])</h5>
+                        
+                        <p class="card-text ">Role :- @dt.Rows[i]["specialist"]</p>
+                        <p class="card-text ">Experience :- @dt.Rows[i]["experience"] Years</p>
+                        <p class="card-text ">Fee :- @dt.Rows[i]["fee"] INR</p>
+                        <a href="/Home/Login"class="btn btn-dark button">Book</a>
+                        
+                    </div>
+                </div>
+            
+            </div>
+             }
+                 }
+             else
+                            {
+                               <h5 class="text-center">No Records Found Here</h5> 
+                            }
+                            }
+    </div>
+</div>

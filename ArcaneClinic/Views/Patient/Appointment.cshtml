@@ -1,0 +1,114 @@
+﻿@model ArcaneClinic.Models.Appointment
+@{
+    ViewBag.Title = "Appointment";
+    Layout = "~/Views/Shared/PatientZone.cshtml";
+}
+<style>
+    .btn1 {
+        padding: 10px 60px;
+        background: red;
+        color: white;
+        border: 0;
+        outline: none;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 4px;
+    }
+
+    .popup {
+        width: 400px;
+        background: #fff;
+        position: absolute;
+        border-radius: 6px;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.1);
+        text-align: center;
+        padding: 0 30px 30px;
+        color: #333;
+        visibility: hidden;
+        transition: transform 0.4s, top 0.4s;
+    }
+
+    .open-popup {
+        visibility: visible;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup img {
+        width: 100px;
+        margin-top: -50px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8" style="margin-top:2%; box-shadow:5px 5px 12px 5px gray; padding:2%;">
+            <h3 class="text-center fw-bolder" style="font-family: Algerian; color: #004E9A">
+                Appointment Panel
+            </h3>
+            <hr style="height:3px; background:forestgreen;">
+            @using (Html.BeginForm("Appointment", "Patient", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+                    <div class="col-6">
+                        @Html.LabelFor(model => model.SelectedDoctor, "Select Doctor")
+                        @Html.DropDownListFor(model => model.SelectedDoctor, Model.DoctorList, "---Select Doctor To Visit---", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SelectedDoctor, "", new { style = "color:red;" })
+                        <br />
+                        <label>Name:</label>
+                        <input type="text" name="txtname" id="txtname" value="@ViewBag.name" class="form-control" readonly />
+                        <br />                       
+                        <label>Email:</label>
+                        <input type="text" name="txtemail" id="txtemail" value="@ViewBag.email" class="form-control" readonly />
+                        <br />
+                        @Html.LabelFor(model => Model.Age)
+                        @Html.TextBoxFor(model => Model.Age, new { @class = "form-control", Autocomplete = "off", placeholder = "Enter Your Age" })
+                        @Html.ValidationMessageFor(model => Model.Age, "", new { style = "color:red;" })
+                        <br />
+                    </div>
+                    <div class="col-6">
+                        <label>Contact Number:</label>
+                        <input type="number" name="txtnum" id="txtnum" class="form-control" value="@ViewBag.mob" readonly/>
+                        <br />
+                        @Html.LabelFor(model => Model.Date)
+                        @Html.TextBoxFor(model => Model.Date, new { @class = "form-control", type = "date", placeholder = "Select Appointment Date" })
+                        @Html.ValidationMessageFor(model => Model.Date, "", new { style = "color:red;" })
+                        <br />
+                        @Html.LabelFor(model => Model.Time)
+                        @Html.TextBoxFor(model => Model.Time, new { @class = "form-control", type = "time", placeholder = "Select Suitable Time" })
+                        @Html.ValidationMessageFor(model => Model.Time, "", new { style = "color:red;" })
+                        <br />
+                        <br />
+                        <input type="submit" class="form-control btn btn-info" value="Make Appointment">
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div class="col-2"></div>
+    </div>
+</div>
+<div class="popup bg-dark-subtle" id="popup">
+    <img src="~/Content/Image/check.png" alt="Check Icon">
+    <h2>Thank You!</h2>
+    <p>Your details have been successfully submitted. Thanks!</p>
+    <button type="button" class="btn btn-success w-100" onclick="closePopup()">OK</button>
+</div>
+
+<script src="~/Scripts/Popup.js"></script>
+@if (ViewBag.ShowPopup != null && ViewBag.ShowPopup == true)
+{
+    <script>
+        window.onload = function () {
+            openPopup();
+        };
+    </script>
+}
+
+

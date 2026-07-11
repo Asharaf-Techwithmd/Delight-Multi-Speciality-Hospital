@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "AppointmentsRecords";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+
+@using System.Data;
+@using System.Data.SqlClient;
+@using ArcaneClinic.Models;
+
+
+<div class="container" style="box-shadow:5px 5px 10px 5px gray; margin-top:2%;">
+    <div class="row">
+        <div class="col-12">
+            <br />
+            <h2 class="text-center" style="color:darkorange; font-weight:bolder;"> All Appointments Records</h2>
+            <hr />
+        </div>
+
+        <!-- Responsive Table -->
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>S.NO</th>
+                            <th>Selected Doctor</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age (in Years)</th>
+                            <th>Number</th>
+                            <td>Schedule Date</td>
+                            <td>Time</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            string cmd = "select * from Appointment where status='no'";
+                            DataTable dt=DatabaseManager.Display_All_Records(cmd);
+                            if (dt.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@dt.Rows[i]["aid"]</td>
+                                        <td>@dt.Rows[i]["sdoctor"]</td>
+                                        <td>@dt.Rows[i]["name"]</td>
+                                        <td>@dt.Rows[i]["email"]</td>
+                                        <td>@dt.Rows[i]["age"] Years</td>
+                                        <td>@dt.Rows[i]["number"]</td>
+                                        <td>@dt.Rows[i]["date"]</td>
+                                        <td>@dt.Rows[i]["time"]</td>
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">No Records Found Here</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

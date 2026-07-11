@@ -1,0 +1,58 @@
+﻿@model ArcaneClinic.Models.Login
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/HomeZone.cshtml";
+}
+
+<script src="~/Scripts/Login_Validation.js"></script>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8 col-md-6 col-lg-4" style="box-shadow: 2px 2px 15px 2px gray; padding: 3%; margin-top: 3%; background-color:transparent; border-radius:2%;">
+            <h4 class="text-center fw-bolder" style="font-family: Algerian; color: #004E9A">Login Panel &nbsp;<span class="bi bi-shield-lock fs-2 fw-bolder"></span></h4>
+            <hr />
+            @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return Login_Validation()" }))
+            {
+                @Html.LabelFor(Model => Model.UserId)
+                @Html.TextBoxFor(Model => Model.UserId, new { @class = "form-control", Autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { style = "color:red", id = "spid" })
+
+                @Html.LabelFor(Model => Model.Password)
+                @Html.TextBoxFor(Model => Model.Password, new { @class = "form-control ", Autocomplete = "off" ,type="password" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { style = "color:red", id = "sppass" })
+                <br />
+                <div class="row">
+                    <div class="col-5 col-md-5">
+                        <input type="text" value="@ViewBag.msg" class="form-control" readonly name="txtcph" />
+                    </div>
+                    <div class="col-2 col-md-2 text-center p-2 fw-bolder">
+                        <span class="fa-refresh"  style="color:blue;font-size:25px; cursor:pointer;">&#8634;</span>
+                    </div>
+                    <div class="col-5 col-md-5">
+                        <input type="text" value="" class="form-control" name="txtcaptcha" placeholder="Enter captcha"/>
+                    </div>
+                </div>
+        
+                <input type="submit" value="Login Now" class="form-control btn btn-info" style="background: #004E9A;color:#fff"/>
+            }
+            <br />
+            <h6 class="text-end">For New User | <a href="/Home/JoinUs" class="text-decoration-underline" style="color: #004E9A">&nbsp;SignUp Now</a></h6>
+        </div>
+    </div>
+</div>
+<script>
+    $('body').bind('copy paste', function (e) {
+        e.preventDefault(); return false;
+    })
+    $(document).ready(function () {
+        $(".fa-refresh").click(function () {
+            $.ajax({
+                type: "post",
+                url: "/Home/Refresh",
+                success: function (data) {
+                    $("input[name='txtcph']").val(data);
+                }
+            })
+        })
+    })
+</script>
+

@@ -1,0 +1,42 @@
+﻿@model ArcaneClinic.Models.AddSlider
+@{
+    ViewBag.Title = "AddSlider";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8 col-md-6 col-lg-4" style="box-shadow: 2px 2px 15px 2px gray; padding: 3%; margin-top: 3%; background-color:gray;">
+            <h4 class="text-center">Slider Upload Panel</h4>
+            <hr />
+            @using (Html.BeginForm("AddSlider", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.LabelFor(Model => Model.Pid)
+                @Html.TextBoxFor(Model => Model.Pid, new { @class = "form-control", Autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.Pid, "", new { style = "color:red", })
+                <br />
+                @Html.LabelFor(Model => Model.Pname)
+                @Html.TextBoxFor(Model => Model.Pname, new { @class = "form-control", Autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.Pname, "", new { style = "color:red", })
+                <br />
+                @Html.LabelFor(Model => Model.Pic)
+                @Html.TextBoxFor(Model => Model.Pic, new { @class = "form-control", type = "file", Autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.Pic, "", new { style = "color:red", })
+                <br />
+            @Html.LabelFor(Model=>Model.Description)
+                @Html.TextBoxFor(Model => Model.Description, new { @class = "form-control", Autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { style = "color:red", })
+                <input type="submit" value="Upload Now" class="form-control btn btn-dark" />
+            }
+
+
+            <br />
+            <hr />
+
+            <label class="text-center fw-bolder">For Delete Slider :</label>
+            <form action="/Admin/ViewDoctors" method="post">
+                <button type="submit" class="btn btn-danger form-control">Delete Now</button>
+            </form>
+        </div>
+    </div>
+</div>

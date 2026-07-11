@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/PatientZone.cshtml";
+}
+<script>
+    var total = "";
+    $(document).ready(function () {
+        $(".bi-star-fill").css({ "fontSize": "45px", "cursor": "pointer", "color": "goldenrod" })
+        $("#sp1,#sp2,#sp3,#sp4,#sp5").css("display", "none");
+        $("#s1").click(function () {
+            total = $("#sp1").text();
+            $("input[name='txtrate']").val(total);
+            $("#s1").css("color", "green")
+            $("#s2,#s3,#s4,#s5").css("color", "goldenrod")
+        })
+        $("#s2").click(function () {
+            total = $("#sp2").text();
+            $("input[name='txtrate']").val(total);
+            $("#s1,#s2").css("color", "green")
+            $("#s3,#s4,#s5").css("color", "goldenrod")
+        })
+        $("#s3").click(function () {
+            total = $("#sp3").text();
+            $("input[name='txtrate']").val(total);
+            $("#s1,#s2,#s3").css("color", "green")
+            $("#s4,#s5").css("color", "goldenrod")
+        })
+        $("#s4").click(function () {
+            total = $("#sp4").text();
+            $("input[name='txtrate']").val(total);
+            $("#s1,#s2,#s3,#s4").css("color", "green")
+            $("#s5").css("color", "goldenrod")
+        })
+        $("#s5").click(function () {
+            total = $("#sp5").text();
+            $("input[name='txtrate']").val(total);
+            $("#s1,#s2,#s3,#s4,#s5").css("color", "green")
+        })
+    })
+</script>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-sm-10" style="box-shadow: 2px 2px 12px 2px rosybrown; margin: 2%; padding: 2%;">
+            <h3 class="text-center fw-bolder" style="font-family: Algerian; color: #004E9A">Review And Rating Module</h3>
+            <hr style="height: 3px; background: orangered;">
+
+            <p class="mb-2">Rate Here</p>
+            <div class="d-flex align-items-center">
+                <span class="bi bi-star-fill" id="s1"></span>
+                <span class="bi bi-star-fill" id="s2"></span>
+                <span class="bi bi-star-fill" id="s3"></span>
+                <span class="bi bi-star-fill" id="s4"></span>
+                <span class="bi bi-star-fill" id="s5"></span>
+                <span class="ms-2">
+                    <span id="sp1">1</span>
+                    <span id="sp2">2</span>
+                    <span id="sp3">3</span>
+                    <span id="sp4">4</span>
+                    <span id="sp5">5</span>
+                </span>
+            </div>
+            <br>
+            <form action="/Patient/Feedback" method="post">
+                <input type="hidden" name="txtrate" />
+                <label for="txtmsg" class="form-label">Write Review:</label>
+                <textarea class="form-control" id="txtmsg" name="txtmessage" style="height: 140px;"></textarea>
+                <br>
+                <input type="submit" class="btn btn-info w-100" value="Submit Review">
+                <br />
+                <h3 class="text-center mt-3">@ViewBag.msg</h3>
+            </form>
+        </div>
+    </div>
+</div>

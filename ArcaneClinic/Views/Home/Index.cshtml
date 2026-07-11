@@ -1,0 +1,381 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/HomeZone.cshtml";
+}
+@using System.Data;
+@using System.Data.SqlClient;
+@using ArcaneClinic.Models;
+
+<!-- popup -->
+<div class="modal fade" id="pageLoadModal" tabindex="-1" aria-labelledby="pageLoadModalLabel" aria-hidden="true" style="margin-top: 150px;">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color:antiquewhite">
+            <div class="modal-header">
+                <h5 class="modal-title m-auto" id="pageLoadModalLabel" style="font-family:Algerian"> Delight Multi-Speciality Hospital</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body m-auto">
+                <img src="~/Content/Image/COVID-banner.jpg" style=" height:200px; width:270px;" />
+            </div>
+            <div class="modal-footer">
+                <div class="m-auto">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Continue</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- popup js coode -->
+<script>
+    window.addEventListener('load', function () {
+        var myModal = new bootstrap.Modal(document.getElementById('pageLoadModal'));
+        myModal.show();
+    });
+</script>
+
+<style>
+    .card-title {
+        font-family:Algerian;
+    }
+ .carousel-inner img {
+        height: 550px;        
+    }
+
+</style>
+<!-- slider -->
+<div class="container-fluid">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                <marquee class="fs-5 p-1" behavior="alternate" style="background: #648E48; color: white">
+                    24×7 availability of experts from all speciality including Heart, Brain, Bone & Joint, Stomach, Cancer, Respiratory problems...
+                </marquee>
+            </div>
+        </div>
+        <div class="row">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                <div class="carousel-indicators">
+                    @{
+                        string query = "SELECT * FROM addslider";
+                        DataTable dt = DatabaseManager.Display_All_Records(query);
+                        if (dt.Rows.Count > 0)
+                        {
+                            for (int i = 0; i < dt.Rows.Count; i++)
+                            {
+                                string activeClass = i == 0 ? "active" : "";
+                                
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@activeClass" aria-current="@((i==0)?"true":"false")" aria-label="Slide @(i+1)"></button>
+                        
+                        
+                            }
+                        }
+                    }
+                </div>
+                <div class="carousel-inner">
+                    @{
+                        if (dt.Rows.Count > 0)
+                        {
+                            for (int i = 0; i < dt.Rows.Count; i++)
+                            {
+                                string activeClass = i == 0 ? "active" : "";
+                                string imageUrl = dt.Rows[i]["pic"].ToString();
+                                string desc = dt.Rows[i]["descr"].ToString();
+                                <div class="carousel-item @activeClass">
+                                    <img src="~/Content/Slider_img/@imageUrl" class="w-100" alt="Slider Image" />
+                                    <div class="carousel-caption d-none d-md-block">
+
+                                        <h2 style="margin: 2%; background-color: #004E9A;padding:2%">
+                                            @desc
+                                        </h2>
+
+
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    <!-- cards -->
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="card-group hover-effect">
+                <div class="card">
+                    <div class="card-body text-center text-dark ">
+                        <h5 class="card-title">Hospitality</h5>
+                        <p>Clinical excellence must be the priority <br> for any health care service provider.</p>
+                        <a href="/Home/JoinUs" class="btn btn-outline-primary" type="submit">To Join Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card-group hover-effect">
+                <div class="card">
+                    <div class="card-body text-center text-dark ">
+                        <h5 class="card-title">Emergency Care</h5>
+                        <p>Clinical excellence must be the priority <br>for any health care service provider.</p>
+                        <a href="tel:+919026663765" class="btn btn-outline-primary" type="submit">+91 9026663765</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card-group hover-effect">
+                <div class="card">
+                    <div class="card-body text-center text-dark">
+                        <h5 class="card-title ">Chamber Service</h5>
+                        <p>Clinical excellence must be the priority <br> for any health care service provider.</p>
+                        <a href="/Home/Login" class="btn btn-outline-primary" type="submit">Make a Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br />
+    <div class="container mt-5">
+        <div class="row chairman-section">
+            <div class="col-md-4">
+                @{
+                    string query1 = "select * from cman";
+                    DataTable dtl = DatabaseManager.Display_All_Records(query1);
+                    if (dtl.Rows.Count > 0)
+                    {
+                        <img src="~/Content/Slider_img/@dtl.Rows[0]["picture"]" alt="Chairman" class="img-fluid chairman-image img-responsive img-thumbnail">
+                    }
+                }
+            </div>
+            <div class="col-md-8">
+                <br />
+                <h2><span class="highlight" style="color: #004E9A">MESSAGE FROM CHAIRMAN</span></h2>
+                <p>
+                    <b>Delight Multi-Speciality Hospital</b>, a premier healthcare provider, is dedicated to delivering exceptional medical care and comprehensive healthcare services. With state-of-the-art infrastructure and a commitment to innovation, we strive to ensure the highest standards of patient care.
+                </p>
+                <h4>What makes us stand out:</h4>
+                <ul>
+                    <li>
+                        <strong>World-Class Medical Facilities:</strong> Delight offers cutting-edge technology and infrastructure designed to ensure precise diagnoses and effective treatments. Our advanced operation theaters, imaging systems, and diagnostic equipment set a new benchmark in healthcare services.
+                    </li>
+                    <li>
+                        <strong>Expert Medical Team:</strong> Our team of experienced doctors, surgeons, and healthcare professionals is committed to providing compassionate and expert care in every specialty. Your well-being is our top priority.
+                    </li>
+                </ul>
+                <a href="/Home/AboutUs" class="btn mt-3 text-light" style="background-color: #004E9A">
+                    Read More...
+                </a>
+            </div>
+        </div>
+        <div class="quote-box mt-4">
+            "We at DELIGHT are COMMITTED to providing exceptional healthcare services through continuous innovation, expertise, and a patient-first approach for complete customer satisfaction."
+        </div>
+    </div>
+
+    <hr style="height: 2px; background-color: black;">
+    <br>
+    <br>
+    <div class="row">
+        <h1 class="text-center fw-bolder" style="font-family: Algerian; color: #004E9A">Our Departments</h1> <hr style="height: 3px; background-color: #004E9A; width: 100px; margin: auto;">
+        <p class="text-center fs-4">
+            To become a leading healthcare institution recognized for excellence in patient care, innovation, and community service.
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card h-100 hover-effect">
+                        <img src="~/Content/Image/p2.jpg" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Surgical Services</h5>
+                            <p class="card-text">Comprehensive procedures for conditions requiring operative care.Expert care for fractures, joint replacements, and musculoskeletal conditions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 hover-effect">
+                        <img src="~/Content/Image/p1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Comprehensive Checkups</h5>
+                            <p class="card-text">General assessment of your overall health.A comprehensive health screening tailored for busy professionals.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 hover-effect">
+                        <img src="~/Content/Image/p3.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Dental Care</h5>
+                            <p class="card-text">Regular cleanings, checkups, and cavity prevention.Healthy teeth, healthy smile – we care for your oral health with expertise and compassion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card h-100 hover-effect">
+                        <img src="~/Content/Image/p6.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Diagnostic Testing</h5>
+                            <p class="card-text">Accurate and timely diagnostic testing services to ensure precise diagnosis and effective treatment plans.Blood tests, urine analysis, and biopsy services.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 hover-effect">
+                        <img src="~/Content/Image/p5.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Skin Surgery</h5>
+                            <p class="card-text">Expert skin surgery solutions, from cosmetic enhancements to medical treatments, ensuring healthy and flawless skin.Precise and safe removal of skin cancers and pre-cancerous growths.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 hover-effect">
+                        <img src="~/Content/Image/p4.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Consultation Services</h5>
+                            <p class="card-text">Expert guidance and personalized medical advice from our experienced consultants across various specialties. Your health, our priority.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+
+    <br />
+    <div class="container choose-us-section">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center">
+                <img src="~/Content/Image/dms1.jpg" alt="DMS" class="img-fluid choose-us-image img-responsive img-thumbnail">
+            </div>
+            <div class="col-md-6 p-3">
+                <h4 class="choose-us-title fw-bold" style="color: #004E9A">Why Choose Delight</h4>
+                <h2 class="choose-us-heading">We Provide Experts to Deliver the Best Healthcare for You</h2>
+                <ul class="choose-us-list">
+                    <li>
+                        <div class="number">1</div>
+                        <div>
+                            <h5>State-of-the-Art Technologies</h5>
+                            <p>We leverage the latest medical equipment and technologies to provide accurate diagnoses and effective treatments.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="number">2</div>
+                        <div>
+                            <h5>High-Quality Care</h5>
+                            <p>Our commitment to quality ensures that every patient receives the best care tailored to their unique needs.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="number">3</div>
+                        <div>
+                            <h5>Expert Teams</h5>
+                            <p>Our specialists bring expertise and dedication to every case, ensuring optimal outcomes for our patients.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="number">4</div>
+                        <div>
+                            <h5>Patient-Centered Environment</h5>
+                            <p>We create a supportive and comfortable environment to make your healthcare journey stress-free and effective.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="review">
+        <div class="container py-5">
+            <h2 class="text-center mb-4 fw-bold" style="color: #004E9A">What Our Patients Say.....</h2>
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <p>
+                            "Delight Hospital provided exceptional care and treatment. The staff was friendly and professional."
+                        </p>
+                        <small>- Hareesh Rawat</small>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <p>
+                            "Highly recommend this hospital. The facilities are top-notch, and the doctors are extremely knowledgeable."
+                        </p>
+                        <small>- Md Asharaf</small>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <p>
+                            "I received excellent care at Delight Hospital. Thank you for making my recovery smooth and stress-free."
+                        </p>
+                        <small>- Vishant Singh</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row text-center">
+            <!-- Feature 1 -->
+            <div class="col-md-4">
+                <div class="feature-card hover-effect">
+                    <div class="feature-icon mb-3">
+                        <i class="bi bi-person-badge-fill"></i>
+                    </div>
+                    <h4>Get Treated By The Best</h4>
+                    <p>Trusted care from India’s leading specialists.</p>
+                </div>
+            </div>
+            <!-- Feature 2 -->
+            <div class="col-md-4">
+                <div class="feature-card hover-effect">
+                    <div class="feature-icon mb-3">
+                        <i class="bi bi-laptop-fill"></i>
+                    </div>
+                    <h4>Advanced Technology</h4>
+                    <p>Technology has been an integral part of our services from inception.</p>
+                </div>
+            </div>
+            <!-- Feature 3 -->
+            <div class="col-md-4">
+                <div class="feature-card hover-effect">
+                    <div class="feature-icon mb-3">
+                        <i class="bi bi-award-fill"></i>
+                    </div>
+                    <h4>Awards</h4>
+                    <p>Thank you for your continued trust.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

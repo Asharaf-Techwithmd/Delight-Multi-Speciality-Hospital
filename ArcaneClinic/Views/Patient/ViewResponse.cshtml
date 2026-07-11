@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "ViewResponse";
+    Layout = "~/Views/Shared/PatientZone.cshtml";
+}
+@using System.Data;
+@using System.Data.SqlClient;
+@using ArcaneClinic.Models;
+<div class="container" style="box-shadow:5px 5px 10px 5px gray; margin-top:2%;">
+    <div class="row">
+        <div class="col-12">
+            <br />
+            <h2 class="text-center text-capitalize" style="color: #004E9A; font-weight: bolder; font-family: Algerian">View Feedback Response</h2>
+            Searchbar: <input type="text" id="txtsearch" placeholder="Enter keyword" />
+            <hr />
+        </div>
+
+        <!-- Responsive Table -->
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>FEED.ID</th>
+                            <th>USER ID</th>
+                            <th>RESPONSE</th>
+                            <th>RESPONSE DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblsearch">
+                        @{
+                            string id = Session["uid"] + "";
+                            if (id != "" && id != null)
+                           {
+                               string cmd = "select * from feedbackResponse where userid='" + id + "'";
+                            DataTable dt = DatabaseManager.Display_All_Records(cmd);
+                            if (dt.Rows.Count > 0)
+                            {
+                                
+                                    <tr>
+                                        <td>@dt.Rows[0]["rid"]</td>
+                                        <td>@dt.Rows[0]["feedid"]</td>
+                                        <td>@dt.Rows[0]["userid"]</td>
+                                        <td>@dt.Rows[0]["rmsg"]</td>
+                                        <td>@dt.Rows[0]["rdate"]</td>
+                                        
+                                    </tr>
+                                
+                            }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">No Records Found Here</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<hr />
+
+<div class="container" style="box-shadow:5px 5px 10px 5px gray; margin-top:2%;">
+    <div class="row">
+        <div class="col-12">
+            <br />
+            <h2 class="text-center text-capitalize" style="color: #004E9A; font-weight: bolder; font-family: Algerian" >View Complain Response</h2>
+            Searchbar: <input type="text" id="txtsearch" placeholder="Enter keyword" />
+            <hr />
+        </div>
+
+        <!-- Responsive Table -->
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>COMPLAIN.ID</th>
+                            <th>USER ID</th>
+                            <th>RESPONSE</th>
+                            <th>RESPONSE DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblsearch">
+                        @{
+                            string ed = Session["uid"] + "";
+                            if (ed != "" && ed != null)
+                           {
+                               string query = "select * from ComplainResponse where userid='" + ed + "'";
+                            DataTable dtl = DatabaseManager.Display_All_Records(query);
+                            if (dtl.Rows.Count > 0)
+                            {                               
+                                    <tr>
+                                        <td>@dtl.Rows[0]["crid"]</td>
+                                        <td>@dtl.Rows[0]["cmp_id"]</td>
+                                        <td>@dtl.Rows[0]["userid"]</td>
+                                        <td>@dtl.Rows[0]["rcmp_msg"]</td>
+                                        <td>@dtl.Rows[0]["crdate"]</td>
+
+                                    </tr>                                
+                            }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">No Records Found Here</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#txtsearch").keyup(function () {
+            var value = $(this).val().toLowerCase();
+            $("#tblsearch tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            })
+        })
+    })
+</script>
+

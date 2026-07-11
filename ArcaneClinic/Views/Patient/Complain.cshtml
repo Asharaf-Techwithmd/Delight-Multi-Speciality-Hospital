@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Complain";
+    Layout = "~/Views/Shared/PatientZone.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4" style="margin: 2%; padding: 3%; box-shadow: 0px 0px 4px 0px grey">
+            <h3 style="text-align: center; color: #004E9A">Complain Here <span class="bi bi-envelope"></span></h3>
+            <hr style="background: forestgreen; height: 3px;" />
+            <form action="/Patient/Complain" method="post">
+                <label for="txtmsg">Enter Complain</label>
+                <textarea class="form-control" name="txtmsg" id="txtmsg" style="height: 100px;" required></textarea>
+                <br />
+                <input type="submit" class="btn btn-info w-100" value="Complain Now" />
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Shared/HomeZone.cshtml";
+}
+
+<style>
+    body {
+        background-color: #f9f9f9;
+    }
+
+    .event-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s;
+    }
+
+        .event-card:hover {
+            transform: scale(1.02);
+        }
+
+    .event-image {
+        height: 200px;
+        object-fit: cover;
+    }
+    .button {
+        border: none;
+        color: #fff;
+        background: #004E9A;
+    }
+    .highlight {
+        color: #004E9A;
+    }
+</style>
+
+<hr />
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h3  class="text-center" style="color: #004E9A; font-size: 50px; font-family: Algerian"><b> <a style="color:black;font-size:40px">Upcoming</a>Events</b></h3>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <br />
+        <div class="row">
+            <!-- Sidebar Filter -->
+            <aside class="col-md-3 mb-4">
+                <h5>Filter Events</h5>
+                <form>
+                    <div class="mb-3">
+                        <label for="eventType" class="form-label">Event Type</label>
+                        <select class="form-select" id="eventType">
+                            <option>All</option>
+                            <option>Workshop</option>
+                            <option>Seminar</option>
+                            <option>Retreat</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventDate" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="eventDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <select class="form-select" id="location">
+                            <option>All Locations</option>
+                            <option>Lucknow</option>
+                            <option>Gorakhpur</option>
+                            <option>Kanpur</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 button">Apply Filters</button>
+                </form>
+            </aside>
+
+            <!-- Event Cards -->
+            <div class="col-md-9">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card event-card">
+                            <img src="~/Content/Image/e1.jpg" class="card-img-top event-image" alt="Event 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Mindfulness Workshop</h5>
+                                <p class="card-text">Join us for a relaxing workshop to learn the art of mindfulness.</p>
+                                <p><strong>Date:</strong> Jan 10, 2025</p>
+                                <a href="/Home/Events" class="btn btn-outline-info button" type="submit">Leran More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card event-card">
+                            <img src="~/Content/Image/e2.jpg" class="card-img-top event-image" alt="Event 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Healthy Living Seminar</h5>
+                                <p class="card-text">Discover the secrets to a healthier lifestyle at this engaging seminar.</p>
+                                <p><strong>Date:</strong> Jan 15, 2025</p>
+                                <a href="/Home/Events" class="btn btn-outline-info button" type="submit">Leran More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card event-card">
+                            <img src="~/Content/Image/p6.jpg" class="card-img-top event-image" alt="Event 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Free Retreat</h5>
+                                <p class="card-text">Relax and rejuvenate at our weekend yoga retreat in the mountains.</p>
+                                <p><strong>Date:</strong> Feb 20, 2025</p>
+                                <a href="/Home/Events" class="btn btn-outline-info button" type="submit">Leran More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card event-card">
+                            <img src="~/Content/Image/thriving.jpg" class="card-img-top event-image" alt="Event 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Thriving in Wellness</h5>
+                                <p class="card-text">An interactive session on creating a personalized wellness plan.</p>
+                                <p><strong>Date:</strong> Aug 25, 2024</p>
+                                <a href="/Home/Events" class="btn btn-outline-info button" type="submit">Leran More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card event-card">
+                            <img src="~/Content/Image/sl4.jpg" class="card-img-top event-image" alt="Event 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Community Events</h5>
+                                <p class="card-text">Meet our experts and learn about the services offered.</p>
+                                <p><strong>Date:</strong> Sep 21, 2024</p>
+                                <a href="/Home/Events" class="btn btn-outline-info button" type="submit">Leran More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card event-card">
+                            <img src="~/Content/Image/sl2.jpg" class="card-img-top event-image" alt="Event 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Stress-Free Living Seminar</h5>
+                                <p class="card-text">Learn breathing exercises and stress management strategies.</p>
+                                <p><strong>Date:</strong> Nov 29, 2024</p>
+                                <a href="/Home/Events" class="btn btn-outline-info button" type="submit">Leran More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="container mt-5">
+    <div class="row chairman-section">
+        <div class="col-md-4">
+            <img src="~/Content/Image/p2.jpg" alt="Chairman" class="img-fluid chairman-image img-responsive">
+            
+        </div>
+        <div class="col-md-8">
+            <h2><span class="highlight">OUR EVENTS PURPOSE</span></h2>
+            <p>
+                "Delight Hospital is dedicated to organizing events that promote health awareness, foster community involvement, and support the well-being of individuals through free screenings, workshops, seminars, and partnerships with local organizations. These events aim to enhance the quality of life, build trust, and empower individuals with the knowledge and resources to live healthier lives.
+            </p>
+            <h4>VISION FOR EVENTS:</h4>
+            <ul>
+                <li><strong>Compassionate Service:</strong>
+                    "To create a healthier, stronger community by providing innovative, accessible, and compassionate healthcare through meaningful events that educate, engage, and inspire."
+                </li>
+                <li>
+                    <strong>Community-Centered Care:</strong>  All events will be designed with the community’s needs in mind, ensuring they are inclusive and accessible to diverse populations.
+                </li>
+                <li>
+                    <strong>Innovation:</strong>  We will continuously explore new ways to engage and support our community, utilizing technology and creative approaches to deliver meaningful healthcare education.
+                </li>
+            </ul>           
+        </div>
+    </div>
+    </div>
+
+

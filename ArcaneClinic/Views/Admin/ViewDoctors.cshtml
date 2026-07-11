@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "ViewDoctors";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+@using System.Data;
+@using System.Data.SqlClient;
+@using ArcaneClinic.Models;
+
+<div class="container" style="box-shadow:5px 5px 10px 5px gray; margin-top:2%;">
+    <div class="row">
+        <div class="col-12">
+            <br />
+            <h2 class="text-center" style="color:darkorange; font-weight:bolder;">View Doctors </h2>
+            <hr />
+        </div>
+
+        <!-- Responsive Table -->
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>S.NO</th>
+                            <th>Name</th>
+                            <th>Qualification</th>
+                            <th>Specialist</th>
+                            <th>Room No</th>
+                            <th>Experience (in years)</th>
+                            <td>Fee</td>
+                            <td>Image</td>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            string cmd = "select * from addoctor where status='yes'";
+                            DataTable dt = DatabaseManager.Display_All_Records(cmd);
+                            if (dt.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@dt.Rows[i]["did"]</td>
+                                        <td>@dt.Rows[i]["name"]</td>
+                                        <td>@dt.Rows[i]["qualification"]</td>
+                                        <td>@dt.Rows[i]["specialist"]</td>
+                                        <td>@dt.Rows[i]["room_no"]</td>
+                                        <td>@dt.Rows[i]["experience"] Years</td>
+                                        <td>@dt.Rows[i]["fee"]</td>
+                                        <td>@dt.Rows[i]["image"]</td>
+                                        <td>
+                                            <a href="/Admin/UpDoctors?ud=@dt.Rows[i]["did"]" class="btn btn-warning" target="_blank">Edit</a>
+                                            <a href="/Admin/DelDoctor?dd=@dt.Rows[i]["did"]" class=" btn btn-danger">Block</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">No Records Found Here</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

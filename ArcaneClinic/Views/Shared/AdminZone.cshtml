@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,700;1,100;1,300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <style>
+        .sidebar {
+            transition: all 0.3s ease;
+            width: 250px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+           background-color: #558236;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+        }
+
+            .sidebar.collapsed {
+                width: 0;
+                overflow: hidden;
+            }
+
+    </style>
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <!-- Sidebar -->
+            <div id="sidebar" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-success sidebar">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <!-- Sidebar Header -->
+                    
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark fw-bolder text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Menu</span>
+                    </a>
+                    <!-- Sidebar Menu -->
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a href="/Home/Index" class="nav-link align-middle px-0 text-dark fw-bolder">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Admin/Index" class="nav-link px-0 align-middle text-dark fw-bolder">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-dark fw-bolder">
+                                <i class="fs-4 bi bi-plus-circle"></i> <span class="ms-1 d-none d-sm-inline">Add Actions</span>
+                            </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="/Admin/AddLogo" class="nav-link px-0 align-middle text-info fw-bolder">
+                                        <i class="fs-4 bi bi-plus-circle"></i> <span class="ms-1 d-none d-sm-inline">Add Logo</span>
+                                    </a>
+                                </li>
+                                <li class="w-100">
+                                    <a href="/Admin/AddDoctor" class="nav-link px-0 align-middle text-info fw-bolder">
+                                        <i class="fs-4 bi bi-plus-circle"></i> <span class="ms-1 d-none d-sm-inline">Add Doctor</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/AddSlider" class="nav-link px-0 align-middle text-info fw-bolder">
+                                        <i class="fs-4 bi bi-plus-circle"></i> <span class="ms-1 d-none d-sm-inline">Add Slider</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/AddSlider" class="nav-link px-0 align-middle text-info fw-bolder">
+                                        <i class="fs-4 bi bi-plus-circle"></i> <span class="ms-1 d-none d-sm-inline">Add Chairman</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>                      
+                        <li>
+                            <a href="/Admin/ViewDoctors" class="nav-link px-0 align-middle text-dark fw-bolder">
+                                <i class="fs-4 bi-person-lines-fill"></i> <span class="ms-1 d-none d-sm-inline">View Doctors</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/Admin/AddNotification" class="nav-link px-0 align-middle text-dark fw-bolder">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Add Notification</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-dark fw-bolder">
+                                <i class="fs-4 bi-view-list"></i> <span class="ms-1 d-none d-sm-inline">Enquiry Actions</span>
+                            </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="/Admin/ViewEnquiry" class="nav-link px-0 text-info fw-bolder"><i class="bi bi-pencil-square"></i> <span class="d-none d-sm-inline"> View Enquiry</span></a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/FeedbackResponse" class="nav-link px-0 text-info fw-bolder"> <i class="bi bi-person-lines-fill"></i><span class="d-none d-sm-inline"> Feedback Response</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-dark fw-bolder">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Records</span>
+                            </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="/Admin/CurrentAppointments" class="nav-link px-0 text-info fw-bolder"> <span class="d-none d-sm-inline">&#10147; Current Appointments</span></a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/AppointmentsRecords" class="nav-link px-0 text-info fw-bolder"> <span class="d-none d-sm-inline">&#10147;AppointmentsRecords</span></a>
+                                </li>
+                                <li>
+                                    <a href="/Admin/RegisterRecords" class="nav-link px-0 text-info fw-bolder"> <span class="d-none d-sm-inline">&#10147; Registration Records</span></a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/Admin/ViewFeedback" class="nav-link px-0 align-middle text-dark fw-bolder">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">View Feedback</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Admin/ViewComplain" class="nav-link px-0 align-middle text-dark fw-bolder">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">View Complain</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- User Profile Dropdown -->
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="~/Content/Image/Arcane.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1 text-warning-emphasis fw-bolder">Admin</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/Home/Login">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Content Area -->
+            <div class="col py-3">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("collapsed");
+        }
+    </script>
+</body>
+</html>

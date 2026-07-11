@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "UpDoctors";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+<style>
+    .form-control {
+        border: 1px solid forestgreen;
+        border-radius: 0px;
+    }
+</style>
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8 mt-2" style="box-shadow:5px 5px 12px 5px gray;min-height:480px;">
+        <br />
+        <h3 class="text-center"> Update Doctors Panel </h3>
+        <hr />
+        <form action="/Admin/UpDoctors" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <label>Did :</label>
+                    <input type="text" name="txtid" class="form-control" value="@ViewBag.id" readonly />
+                    <br />
+                    <label>Name :</label>
+                    <input type="text" name="txtname" class="form-control" value="@ViewBag.name"/>
+                    <br />
+                    <label>Qualification :</label>
+                    <input type="text" name="txtql" class="form-control" value="@ViewBag.Qualification" readonly />
+                    <br />
+                    <label>Specialist category :</label>
+                    <input type="text" name="txtsp" class="form-control" value="@ViewBag.Specialist" readonly />
+                </div>
+                <div class="col-6">
+                    <label>Room No :</label>
+                    <input type="text" name="txtrn" class="form-control" value="@ViewBag.Room" readonly />
+                    <br />
+                    <label>Experience (in years) :</label>
+                    <input type="text" name="txtExp" class="form-control" value="@ViewBag.exp" />
+                    <br />
+                    <label>Fee :</label>
+                    <input type="text" name="txtfee" class="form-control" value="@ViewBag.fee" />
+                    <br />
+                    <br />
+                    <input type="submit" class="form-control btn btn-warning" value="Update Now" />
+                    <br />
+                </div>
+                               
+            </div>
+        </form>
+    </div>
+    <div class="col-2"></div>
+</div>

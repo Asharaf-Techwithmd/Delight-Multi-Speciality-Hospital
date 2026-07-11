@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "ViewNotification";
+    Layout = "~/Views/Shared/PatientZone.cshtml";
+}
+@using System.Data;
+@using System.Data.SqlClient;
+@using ArcaneClinic.Models;
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12" style="box-shadow:2px 2px 12px 2px rosybrown;margin-top:2%;">
+            <h3 class="text-center" style="color: #004E9A">Notifications</h3>
+            <hr style="background:aqua; height:2px" />
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="text-center" style="background:skyblue">
+                        <tr>
+                            <th>SN.</th>
+                            <th>Type</th>
+                            <th>Notification</th>
+                            <th>Date</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            string cmd = "select * from notification";
+                            DataTable dt = DatabaseManager.Display_All_Records(cmd);
+                            if (dt.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    <tr>
+                                        <td class="text-center">@dt.Rows[i]["nid"]</td>
+                                        <td>@dt.Rows[i]["ntype"]</td>
+                                        <td>@dt.Rows[i]["nmsg"]</td>
+                                        <td class="text-center">@dt.Rows[i]["ndate"]</td>
+                                        
+                                      
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center">No notifications found</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

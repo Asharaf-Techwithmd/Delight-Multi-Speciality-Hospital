@@ -1,0 +1,95 @@
+﻿@*@model ArcaneClinic.Models.User_Feedback*@
+@{
+    ViewBag.Title = "FeedbackResponse";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+@using System.Data;
+@using System.Data.SqlClient;
+@using ArcaneClinic.Models;
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4" style="box-shadow:2px 2px 12px 2px rosybrown; padding:2%;">
+        <h2>Feedback Response</h2>
+        <hr />
+        <form action="/Admin/FeedbackResponse" method="post">
+            <label>Feed id</label>
+            <input type="text" value="@ViewBag.id" name="txtid" class="form-control" readonly />
+            <label>UserId</label>
+            <input type="text" value="@ViewBag.use" name="txtuid" class="form-control" readonly/>
+            <label>Response Message</label>
+            <textarea class="form-control" name="txtmsg" required></textarea>
+            <br />
+            <input type="submit" value="Response Now" class="form-control btn btn-dark" />
+            <h4>@ViewBag.msg</h4>
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>
+<br />
+<hr />
+<br />
+<div class="container" style="box-shadow:5px 5px 10px 5px gray; margin-top:2%;">
+    <div class="row">
+        <div class="col-12">
+            <br />
+            <h2 class="text-center text-capitalize" style="color:rosybrown; font-weight:bolder;"> Feedback Response Panel</h2>
+           Searchbar: <input type="text" id="txtsearch" placeholder="Enter keyword"/>
+            <hr />          
+        </div>
+
+        <!-- Responsive Table -->
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>FEED.ID</th>
+                            <th>USER ID</th>
+                            <th>RESPONSE</th>
+                            <th>RESPONSE DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblsearch">
+                        @{
+                            string cmd = "select * from feedbackResponse";
+                            DataTable dt = DatabaseManager.Display_All_Records(cmd);
+                            if (dt.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@dt.Rows[i]["rid"]</td>
+                                        <td>@dt.Rows[i]["feedid"]</td>
+                                        <td>@dt.Rows[i]["userid"]</td>
+                                        <td>@dt.Rows[i]["rmsg"]</td>
+                                        <td>@dt.Rows[i]["rdate"]</td>
+                                        <td><a class="btn btn-dark bi bi-trash" >Delete</a></td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">No Records Found Here</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#txtsearch").keyup(function () {
+            var value = $(this).val().toLowerCase();
+            $("#tblsearch tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) >-1);
+            })
+        })
+    })
+</script>
+

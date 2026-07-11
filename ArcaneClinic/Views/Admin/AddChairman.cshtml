@@ -1,0 +1,37 @@
+﻿@model ArcaneClinic.Models.CMan
+@{
+    ViewBag.Title = "AddChairman";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8 col-md-6 col-lg-4" style="box-shadow: 2px 2px 15px 2px gray; padding: 3%; margin-top: 3%; background-color:royalblue;">
+            <h4 class="text-center"> Chairman Upload</h4>
+            <hr />
+            @using (Html.BeginForm("AddChairman", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                @Html.LabelFor(Model => Model.PicName)
+                @Html.TextBoxFor(Model => Model.PicName, new { @class = "form-control", Autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.PicName, "", new { style = "color:red", })
+                <br />
+                @Html.LabelFor(Model => Model.ChairmanPic)
+                @Html.TextBoxFor(Model => Model.ChairmanPic, new { @class = "form-control", type = "file", Autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.ChairmanPic, "", new { style = "color:red", })
+                <br />
+
+                <input type="submit" value="Upload Now" class="form-control btn btn-danger" />
+            }
+            <br />
+            <hr />
+
+            <label class="text-center fw-bolder">For Delete Picture :</label>
+            <form action="/Admin/deleteCMan" method="post">
+                <button type="submit" class="btn btn-danger form-control">Delete Now</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+

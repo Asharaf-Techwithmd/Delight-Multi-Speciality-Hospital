@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "ViewComplain";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+
+@using System.Data;
+@using System.Data.SqlClient;
+@using ArcaneClinic.Models;
+
+
+<div class="container" style="box-shadow:5px 5px 10px 5px gray; margin-top:2%;">
+    <div class="row">
+        <div class="col-12">
+            <br />
+            <h2 class="text-center text-capitalize" style="color:rosybrown; font-weight:bolder;"> View Complain Panel</h2>
+            <hr />
+        </div>
+
+        <!-- Responsive Table -->
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>S.NO</th>
+                            <th>UserId</th>
+                            <th>Complain</th>
+                            <th>Complain Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            string cmd = "select * from complain";
+                            DataTable dt = DatabaseManager.Display_All_Records(cmd);
+                            if (dt.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@dt.Rows[i]["cmp_id"]</td>
+                                        <td>@dt.Rows[i]["userid"]</td>                                        
+                                        <td>@dt.Rows[i]["cmp_msg"]</td>
+                                        <td>@dt.Rows[i]["cmp_date"]</td>
+                                        <td><a href="/Admin/ComplainResponse?cmp_id=@dt.Rows[i]["cmp_id"]" class="btn btn-dark">Response</a></td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">No Records Found Here</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

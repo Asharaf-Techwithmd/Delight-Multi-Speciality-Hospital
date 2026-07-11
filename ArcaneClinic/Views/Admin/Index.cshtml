@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+<div class="container">
+    <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-4"></div>
+        <div class="col-12 col-sm-6 col-lg-4">
+            <h3 class="text-center fw-bolder text-decoration-underline" style="color: #004E9A; font-size: 50px; font-family: Algerian">Dashboard</h3>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4"></div>
+    </div>
+    <br />
+    <div class="row g-4">
+        <!-- Daily Summary -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card p-3 shadow-sm border border-dark rounded-3" style="min-height: 150px;">
+                <center>
+                    <a href="/Admin/CurrentAppointments" class="bi bi-journal-medical text-decoration-none" style="font-size: 70px; margin-top: 10px;">&nbsp;@ViewBag.dd</a>
+                    <br />
+                    <h3 style="color: #004E9A;">Daily Summary</h3>
+                </center>
+            </div>
+        </div>
+
+        <!-- View Doctor -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card p-3 shadow-sm border border-dark rounded-3" style="min-height: 150px;">
+                <center>
+                    <a href="/Admin/ViewDoctors" class="bi bi-person-vcard-fill text-decoration-none" style="font-size: 70px; margin-top: 10px;">&nbsp;@ViewBag.dd1</a>
+                    <br />
+                    <h3 style="color: #004E9A;">View Doctor</h3>
+                </center>
+            </div>
+        </div>
+
+        <!-- View Patient Record -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card p-3 shadow-sm border border-dark rounded-3" style="min-height: 150px;">
+                <center>
+                    <a href="/Admin/RegisterRecords" class="bi bi-journal-richtext text-decoration-none" style="font-size: 70px; margin-top: 10px;">&nbsp;@ViewBag.dd2</a>
+                    <br />
+                    <h3 style="color: #004E9A;">View Patient Record</h3>
+                </center>
+            </div>
+        </div>
+
+        <!-- View Appointments -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card p-3 shadow-sm border border-dark rounded-3" style="min-height: 150px;">
+                <center>
+                    <a href="/Admin/CurrentAppointments" class="bi bi-table text-decoration-none" style="font-size: 70px; margin-top: 10px;">&nbsp;@ViewBag.dd</a>
+                    <br />
+                    <h3 style="color: #004E9A;">View Appointments</h3>
+                </center>
+            </div>
+        </div>
+
+        <!-- View Feedback -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card p-3 shadow-sm border border-dark rounded-3" style="min-height: 150px;">
+                <center>
+                    <a href="/Admin/ViewFeedback" class="bi bi-eye text-decoration-none" style="font-size: 70px; margin-top: 10px;">&nbsp;@ViewBag.dd3</a>
+                    <br />
+                    <h3 style="color: #004E9A;">View Feedback</h3>
+                </center>
+            </div>
+        </div>
+
+        <!-- View Enquiry -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card p-3 shadow-sm border border-dark rounded-3" style="min-height: 150px;">
+                <center>
+                    <a href="/Admin/ViewComplain" class="bi bi-chat-left-text-fill text-decoration-none" style="font-size: 70px; margin-top: 10px;">&nbsp;@ViewBag.dd4</a>
+                    <br />
+                    <h3 style="color: #004E9A;">View Complain</h3>
+                </center>
+            </div>
+        </div>
+
+        <!-- Add Alerts -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card p-3 shadow-sm border border-dark rounded-3" style="min-height: 150px;">
+                <center>
+                    <a href="/Admin/AddNotification" class="bi bi-bell text-decoration-none" style="font-size: 70px; margin-top: 10px;">&nbsp;@ViewBag.dd5</a>
+                    <br />
+                    <h3 style="color: #004E9A;">Add Alerts</h3>
+                </center>
+            </div>
+        </div>
+
+        <!-- Response -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card p-3 shadow-sm border border-dark rounded-3" style="min-height: 150px;">
+                <center>
+                    <a href="/Admin/ViewEnquiry" class="bi bi-pencil-square text-decoration-none" style="font-size: 70px; margin-top: 10px;">&nbsp;@ViewBag.dd6</a>
+                    <br />
+                    <h3 style="color: #004E9A;">View Enquiry</h3>
+                </center>
+            </div>
+        </div>
+
+        <!-- Sign Out -->
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card p-3 shadow-sm border border-dark rounded-3" style="min-height: 150px;">
+                <center>
+                    <a href="/Home/Login" class="bi bi-box-arrow-right" style="font-size: 70px; margin-top: 10px;"></a>
+                    <br />
+                    <h3 style="color: #004E9A;">Sign Out</h3>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>

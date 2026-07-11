@@ -1,0 +1,35 @@
+﻿@model ArcaneClinic.Models.AddLogo
+@{
+    ViewBag.Title = "AddLogo";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8 col-md-6 col-lg-4" style="box-shadow: 2px 2px 15px 2px gray; padding: 3%; margin-top: 3%; background-color:royalblue;">
+            <h4 class="text-center">Logo Upload Panel</h4>
+            <hr />
+            @using (Html.BeginForm("AddLogo", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+               
+                @Html.LabelFor(Model => Model.LogoName)
+                @Html.TextBoxFor(Model => Model.LogoName, new { @class = "form-control", Autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.LogoName, "", new { style = "color:red", })
+                <br />
+                @Html.LabelFor(Model => Model.LogoPic)
+                @Html.TextBoxFor(Model => Model.LogoPic, new { @class = "form-control", type = "file", Autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.LogoPic, "", new { style = "color:red", })
+                <br />
+                <input type="submit" value="Upload Now" class="form-control btn btn-danger" />
+            }
+            <br />
+            <hr />
+
+            <label class="text-center fw-bolder">For Delete Logo :</label>
+            <form action="/Admin/ViewEnquiry" method="post">
+                <button type="submit" class="btn btn-danger form-control">Delete Now</button>
+            </form>
+
+        </div>
+    </div>
+</div>

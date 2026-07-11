@@ -1,0 +1,63 @@
+﻿@model ArcaneClinic.Models.AddDoctor
+@{
+    ViewBag.Title = "AddDoctor";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8" style="margin-top:2%; box-shadow:5px 5px 12px 5px gray; padding:2%;">
+            <h3 class="text-center">
+                Add Doctor Panel Here
+            </h3>
+            <hr style="height:3px; background:forestgreen;">
+            @using (Html.BeginForm("AddDoctor", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+                    <div class="col-6">
+
+                        @Html.LabelFor(model => Model.Name)
+                        @Html.TextBoxFor(model => Model.Name, new { @class = "form-control", Autocomplete = "off" })
+                        @Html.ValidationMessageFor(model => Model.Name, "", new { style = "color:red;" })
+                        <br />
+                        @Html.LabelFor(model => model.SelectedQualification, "Qualification")
+
+                        @Html.DropDownListFor(model => model.SelectedQualification, Model.QualificationList, "---Select a qualification---", new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.SelectedQualification, "", new { style = "color:red;" })
+                        <br />
+                        @Html.LabelFor(model => model.SelectedSpecialist, "Specialist")
+                        @Html.DropDownListFor(model => model.SelectedSpecialist, Model.SpecialistList, "---Select a Category---", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SelectedSpecialist, "", new { style = "color:red;" })
+                        <br />
+                        @Html.LabelFor(model => Model.Room_No)
+                        @Html.TextBoxFor(model => Model.Room_No, new { @class = "form-control", Autocomplete = "off" })
+                        @Html.ValidationMessageFor(model => Model.Room_No, "", new { style = "color:red;" })
+                        <br />
+                    </div>
+                    <div class="col-6">
+                        @Html.LabelFor(model => Model.Experience)
+                        @Html.TextBoxFor(model => Model.Experience, new { @class = "form-control", Autocomplete = "off" })
+                        @Html.ValidationMessageFor(model => Model.Experience, "", new { style = "color:red;" })
+                        <br />
+                        @Html.LabelFor(model => Model.Fee)
+                        @Html.TextBoxFor(model => Model.Fee, new { @class = "form-control", Autocomplete = "off" })
+                        @Html.ValidationMessageFor(model => Model.Fee, "", new { style = "color:red;" })
+                        <br />
+                        @Html.LabelFor(model => Model.Image)
+                        @Html.TextBoxFor(model => Model.Image, new { @class = "form-control", type = "file" })
+                        @Html.ValidationMessageFor(model => Model.Image, "", new { style = "color:red;" })
+                        <br />
+                        <br />
+                        <input type="submit" class="form-control btn btn-info" value="Add Doctor Now">
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div class="col-2"></div>
+    </div>
+</div>
+

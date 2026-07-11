@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/PatientZone.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10" style="box-shadow: 0px 0px 4px 0px gray; margin: 2%; padding: 2%;">
+            
+                <h3 class="text-center fw-bolder" style="color: #004E9A">
+                    My Profile Panel
+                    
+                </h3>
+           
+            <hr style="background: maroon; height: 3px;" />
+            <form action="/Patient/MyProfile" method="GET">
+                <div class="row">
+                    <div class="col-md-6 col-12 mb-3">
+                        <label for="txtname">Your Name</label>
+                        <input type="text" class="form-control" name="txtname" id="txtname" value="@ViewBag.name" readonly/>
+                    </div>
+                    <div class="col-md-6 col-12 mb-3">
+                        <label for="txtemail">Your Email</label>
+                        <input type="text" class="form-control" name="txtemail" id="txtemail" value="@ViewBag.email" readonly/>
+                    </div>
+                    <div class="col-md-6 col-12 mb-3">
+                        <label for="txtmobile">Your Mobile Number</label>
+                        <input type="text" class="form-control" name="txtmobile" id="txtmobile" value="@ViewBag.mobile"readonly />
+                    </div>
+                    <div class="col-md-6 col-12 text-center mb-3">
+                        <label>Your Picture</label>
+                        <div>
+                            <img src="~/Content/register_img/@ViewBag.img"
+                                 alt="User Picture"
+                                 style="height: 100px; width: 100px;"
+                                 class="img img-fluid img-thumbnail" />
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <a href="/Patient/EditProfile" class="btn btn-warning" target="_blank">Edit Your Profile</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+

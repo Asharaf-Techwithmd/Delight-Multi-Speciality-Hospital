@@ -1,0 +1,134 @@
+﻿@model ArcaneClinic.Models.JoinUs
+@{
+    ViewBag.Title = "JoinUs";
+    Layout = "~/Views/Shared/HomeZone.cshtml";
+    }
+
+<style>
+    
+
+    .btn1 {
+        padding: 10px 60px;
+        background: red;
+        color: white;
+        border: 0;
+        outline: none;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 4px;
+    }
+
+    .popup {
+        width: 400px;
+        background: #fff;
+        position: absolute;
+        border-radius: 3%;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.1);
+        text-align: center;
+        padding: 0 30px 30px;
+        color: #333;
+        visibility: hidden;
+        transition: transform 0.4s, top 0.4s;
+    }
+
+    .open-popup {
+        visibility: visible;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup img {
+        width: 100px;
+        margin-top: -50px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+
+    
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 shadow-lg p-4 rounded" style="background-color: #f8f9fa;">
+            <h3 class="text-center fw-bold mb-4" style="font-family: Cambria, sans-serif; color: #004E9A;">To Join Us</h3>
+            <hr />
+            @using (Html.BeginForm("JoinUs", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+                    <!-- Left Column -->
+                    <div class="col-12 col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label fw-semibold" })
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", autocomplete = "off", placeholder = "Enter your name" })
+                        @Html.ValidationMessageFor(model => Model.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-label fw-semibold" })
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", autocomplete = "off", placeholder = "Enter your email" })
+                        @Html.ValidationMessageFor(model => Model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "form-label fw-semibold" })
+                        @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control", autocomplete = "off", placeholder = "Enter your mobile number" })
+                        @Html.ValidationMessageFor(model => Model.Mobile, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "form-label fw-semibold" })
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "password", placeholder = "Enter your password" })
+                        @Html.ValidationMessageFor(model => Model.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        @Html.LabelFor(model => model.Confirm_Password, htmlAttributes: new { @class = "form-label fw-semibold" })
+                        @Html.TextBoxFor(model => model.Confirm_Password, new { @class = "form-control", autocomplete = "off", placeholder = "Confirm your password" })
+                        @Html.ValidationMessageFor(model => Model.Confirm_Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "form-label fw-semibold" })
+                        @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", type = "date" })
+                        @Html.ValidationMessageFor(model => Model.DOB, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-12 mb-3">
+                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "form-label fw-semibold" })
+                        <div>
+                            @Html.RadioButtonFor(model => model.Gender, "male", new { @class = "form-check-input" })
+                            <label class="form-check-label me-3">Male</label>
+                            @Html.RadioButtonFor(model => model.Gender, "female", new { @class = "form-check-input" })
+                            <label class="form-check-label">Female</label>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-12 mb-3">
+
+                        @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "form-label fw-semibold" })
+                        @Html.TextBoxFor(model => model.Picture, new { @class = "form-control", type = "file", accept = ".jpg,.jpeg" })
+                        @Html.ValidationMessageFor(model => Model.Picture, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <input type="submit" class="btn btn-warning px-4 py-2 fw-bold" style="color: #fff; background: #004E9A; " value="Join Now" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+    
+        <div class="popup bg-dark-subtle"  id="popup">
+            <img src="~/Content/Image/check.png" alt="Check Icon">
+            <h2>Thank You!</h2>
+            <p>Your details have been successfully submitted. Thanks!</p>
+            <button type="button" class="btn btn-success w-100"  onclick="closePopup()">OK</button>
+        </div>
+    
+    <script src="~/Scripts/Popup.js"></script>
+    @if (ViewBag.ShowPopup != null && ViewBag.ShowPopup == true)
+    {
+    <script>
+        window.onload = function () {
+            openPopup();
+        };
+    </script>
+    }
+

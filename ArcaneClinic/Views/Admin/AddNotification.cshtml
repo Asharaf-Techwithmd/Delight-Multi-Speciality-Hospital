@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "AddNotification";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+
+@using System.Data;
+@using System.Data.SqlClient;
+@using ArcaneClinic.Models;
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10 notification-box" style="box-shadow:2px 2px 12px 2px rosybrown; padding:2%">
+            <h3 class=" text-center">
+            Add Notification</h3>
+            <hr style="background:blue; height:2px" />
+            <form action="/Admin/AddNotification" method="post">
+                <div class="mb-3">
+                    <label for="txtnoti" class="form-label">Notification Type:</label>
+                    <input type="text" class="form-control" id="txtnoti" name="txtnoti" required />
+                </div>
+                <div class="mb-3">
+                    <label for="txtnotification" class="form-label">Notification:</label>
+                    <textarea class="form-control" id="txtnotification" name="txtnotification" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-warning w-100">Add Notification</button>
+                <br />
+                <br />
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<br />
+<br />
+<hr />
+<br />
+<!-------code for display notification------->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <h3 class="text-center">Details of Add Notification</h3>
+            <hr style="background:aqua; height:2px" />
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="text-center" style="background:skyblue">
+                        <tr>
+                            <th>SN.</th>
+                            <th>Type</th>
+                            <th>Notification</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            string cmd = "select * from notification";
+                            DataTable dt=DatabaseManager.Display_All_Records(cmd);
+                            if (dt.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    <tr>
+                                        <td class="text-center">@dt.Rows[i]["nid"]</td>
+                                        <td>@dt.Rows[i]["ntype"]</td>
+                                        <td>@dt.Rows[i]["nmsg"]</td>
+                                        <td class="text-center">@dt.Rows[i]["ndate"]</td>                                            
+                                        <td class="text-center"><a href="/Admin/DelNotification?nid=@dt.Rows[i]["nid"]" class="btn btn-dark bi bi-trash">Delete</a></td>                                     
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center">No notifications found</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

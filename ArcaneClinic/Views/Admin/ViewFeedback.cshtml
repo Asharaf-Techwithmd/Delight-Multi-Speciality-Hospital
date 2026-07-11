@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "ViewFeedback";
+    Layout = "~/Views/Shared/AdminZone.cshtml";
+}
+@using System.Data;
+@using System.Data.SqlClient;
+@using ArcaneClinic.Models;
+
+
+<div class="container" style="box-shadow:5px 5px 10px 5px gray; margin-top:2%;">
+    <div class="row">
+        <div class="col-12">
+            <br />
+            <h2 class="text-center text-capitalize" style="color:rosybrown; font-weight:bolder;"> View Feedback Panel</h2>
+            <hr />
+        </div>
+
+        <!-- Responsive Table -->
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>S.NO</th>
+                            <th>UserId</th>
+                            <th>Rating</th>                           
+                            <th>Message</th>
+                            <th>Feedback Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            string cmd = "select * from feedback";
+                            DataTable dt=DatabaseManager.Display_All_Records(cmd);
+                            if (dt.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@dt.Rows[i]["fid"]</td>
+                                        <td>@dt.Rows[i]["userid"]</td>
+                                        <td>@dt.Rows[i]["rate"]</td>
+                                        <td>@dt.Rows[i]["msg"]</td>
+                                        <td>@dt.Rows[i]["fdate"]</td>
+                                        <td><a href="/Admin/FeedbackResponse?fid=@dt.Rows[i]["fid"]" class="btn btn-dark">Response</a></td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">No Records Found Here</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
